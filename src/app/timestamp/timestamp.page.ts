@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-timestamp',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimestampPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public route: NavController
+  ) { }
+
+  time = [{name:'เวลาเข้างาน',time:'00/00/00 , 00:00'},{name:'เวลาออกงาน',time:'00/00/00 , 00:00'}]
 
   ngOnInit() {
   }
 
+  back(){
+    this.route.navigateBack("/menu")
+  }
 }

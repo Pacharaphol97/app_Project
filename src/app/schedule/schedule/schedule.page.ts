@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-schedule',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchedulePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public route: NavController
+  ) { }
 
   ngOnInit() {
   }
 
+  back(){
+    this.route.navigateBack("/menu")
+  }
 }

@@ -15,4 +15,27 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
 
+  notifications(){
+    this.route.navigateForward("/notifications")
+  }
+
+  publicrelations(){
+    this.route.navigateForward("/publicrelations")
+  }
+
+  eventecalender(){
+    this.route.navigateForward("/calender")
+  }
+
+  schedule(){
+    this.route.navigateForward("/schedule")
+  }
+
+  leave(){
+    this.route.navigateForward("/leave")
+  }
+
+  timestamp(){
+    this.route.navigateForward("/timestamp")
+  }
 }

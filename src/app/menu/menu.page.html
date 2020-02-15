@@ -19,22 +19,22 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>แจ้งเตือนทั้งหมด</ion-label>
+      <ion-label (click)="notifications()">แจ้งเตือนทั้งหมด</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>ข่าวประชาสัมพันธ์</ion-label>
+      <ion-label (click)="publicrelations()">ข่าวประชาสัมพันธ์</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>ปฏิทินกิจกรรม</ion-label>
+      <ion-label (click)="eventecalender()">ปฏิทินกิจกรรม</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>กำหนดการต่างๆ</ion-label>
+      <ion-label (click)="schedule()">กำหนดการต่างๆ</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>คำขอลางาน</ion-label>
+      <ion-label (click)="leave()">คำขอลางาน</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>เวลาเข้างาน ออกงาน</ion-label>
+      <ion-label (click)="timestamp()">เวลาเข้างาน ออกงาน</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>ตั้งค่า</ion-label>
