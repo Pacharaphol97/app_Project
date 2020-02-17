@@ -38,4 +38,9 @@ export class MenuPage implements OnInit {
   timestamp(){
     this.route.navigateForward("/timestamp")
   }
+
+  singout(){
+    window.localStorage.removeItem('@token')
+    this.route.navigateBack('/signin')
+  }
 }

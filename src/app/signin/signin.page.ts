@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-signin',
@@ -8,6 +9,9 @@ import { NavController } from '@ionic/angular';
 })
 export class SigninPage implements OnInit {
 
+  email:any;
+  password:any;
+  message:String
   loading = true
 
   constructor(
@@ -19,6 +23,19 @@ export class SigninPage implements OnInit {
 
   async signin() {
     this.loading = false;
-    this.route.navigateForward("/menu")
+    this.message = ''
+    try {
+      const res:any = await firebase.auth().signInWithEmailAndPassword(this.email,this.password)
+      if(res){
+        window.localStorage.setItem('@token', res.user.refreshToken)
+        this.route.navigateForward('/menu')
+        this.loading = true
+      }
+    }catch(error){
+      this.loading = true
+      this.message = "เข้าสู่ระบบไม่สำเร็จ ตรวจสอบผู้ใช้งานและรหัสผ่าน"
+      throw error
+    }
+  
   }
 }
