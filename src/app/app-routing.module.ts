@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'timestamp',
     loadChildren: () => import('./timestamp/timestamp.module').then( m => m.TimestampPageModule)
   },
+  {
+    path: 'setting',
+    loadChildren: () => import('./settings/setting/setting.module').then( m => m.SettingPageModule)
+  },
 
 
 ];

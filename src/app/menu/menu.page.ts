@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-menu',
@@ -39,8 +40,13 @@ export class MenuPage implements OnInit {
     this.route.navigateForward("/timestamp")
   }
 
-  singout(){
-    window.localStorage.removeItem('@token')
+  setting(){
+    this.route.navigateForward("/setting")
+  }
+
+  signout(){
+    firebase.auth().signOut()
+    window.localStorage.clear()
     this.route.navigateBack('/signin')
   }
 }

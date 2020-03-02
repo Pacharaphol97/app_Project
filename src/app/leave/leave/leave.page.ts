@@ -12,7 +12,7 @@ export class LeavePage implements OnInit {
     public route: NavController
   ) { }
 
-  leave = [{type:'ลาพักร้อน',startdata:'00/00/0000',enddata:'00/00/0000',day:'0',status:'รอการอนุมัติ'},{type:'ลากิจ',startdata:'00/00/0000',enddata:'00/00/0000',day:'0',status:'ได้รับการอนุมัติ',approvedata:'00/00/0000 , 00:00'}]
+  leave = [{type:'ลาพักร้อน',startdata:'14/03/2563',enddata:'20/03/2563',day:'7',status:'รอการอนุมัติ'},{type:'ลากิจ',startdata:'17/02/2563',enddata:'17/02/2563',day:'1',status:'ได้รับการอนุมัติ',approvedata:'16/02/2563 , 15:43'}]
 
   ngOnInit() {
   }

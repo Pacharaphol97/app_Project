@@ -12,7 +12,7 @@ export class TimestampPage implements OnInit {
     public route: NavController
   ) { }
 
-  time = [{name:'เวลาเข้างาน',time:'00/00/00 , 00:00'},{name:'เวลาออกงาน',time:'00/00/00 , 00:00'}]
+  time = [{name:'เวลาออกงาน',time:'14/02/2563 , 17:00'},{name:'เวลาเข้างาน',time:'14/02/2563 , 09:00'}]
 
   ngOnInit() {
   }

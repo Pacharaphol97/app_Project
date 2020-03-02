@@ -26,8 +26,9 @@ export class SigninPage implements OnInit {
     this.message = ''
     try {
       const res:any = await firebase.auth().signInWithEmailAndPassword(this.email,this.password)
+      console.log(res)
       if(res){
-        window.localStorage.setItem('@token', res.user.refreshToken)
+        window.localStorage.setItem('@token', res.user.ma)
         this.route.navigateForward('/menu')
         this.loading = true
       }
