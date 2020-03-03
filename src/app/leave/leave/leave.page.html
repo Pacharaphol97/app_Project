@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="10%">
+        <ion-icon size="large" name="arrow-back" (click)="back()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title>คำขอลางาน</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of leave">
+    <ion-card-content>
+      <ion-card-title>คำขอลางาน</ion-card-title>
+      <ion-grid>
+        <ion-row>ประเภท : {{item.type}}</ion-row>
+        <ion-row>จำนวนวันลา : {{item.day}} วัน</ion-row>
+        <ion-row>วันที่เริ่ม : {{item.startdata}}</ion-row>
+        <ion-row>วันที่สิ้นสุด : {{item.enddata}}</ion-row>
+        <ion-row>สถานะ : {{item.status}} {{item.approvedata}}</ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
