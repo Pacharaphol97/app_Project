@@ -24,4 +24,24 @@ export class FirebasefunctionService {
   getHenchman(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/getHenchman',body).toPromise();
   }
+
+  //ดึงประเภทการลางานของพนักงาน
+  getTypeleave(){
+    return this.httpclient.get(firebaseFunction.functionURL +'/getTypeleave').toPromise();
+  }
+
+  //ขอข้อมูลการลางานของพนักงาน
+  getLeave(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/getLeave',body).toPromise();
+  }
+
+  //เพิ่มข้อมูลการลางานของพนักงาน
+  addLeave(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/createleave',body).toPromise();
+  }
+
+  //ยกเลิกคำขอการลางานของพนักงาน
+  cancelLeave(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/cancelleave',body).toPromise();
+  }
 }

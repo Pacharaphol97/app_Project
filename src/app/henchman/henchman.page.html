@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="10%">
+        <ion-icon size="large" name="arrow-back" (click)="back()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title>พนักงานในสังกัด</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-progress-bar [hidden]=dataHenchman type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="dataHenchman">
+    <ion-item *ngFor="let item of dataHenchman.data">
+      <ion-card class="card">
+        <ion-row>
+          <ion-col size="20%">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-col>
+          <ion-col size="20%">
+            รหัส <br>
+            ชื่อ <br>
+            เบอร์โทร <br>
+            อีเมล์ <br>
+          </ion-col>
+          <ion-col >
+            : {{item.personnel.personnel_id}} <br>
+            : {{item.personnel.personnel_fullname.personnel_prefix}}{{item.personnel.personnel_fullname.personnel_firstname}} {{item.personnel.personnel_fullname.personnel_lastname}}<br>
+            : {{item.personnel.personnel_tel}}<br>
+            : {{item.personnel.personnel_email}}<br>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

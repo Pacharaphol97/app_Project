@@ -42,6 +42,10 @@ export class MenuPage implements OnInit {
     this.route.navigateForward("/profile")
   }
 
+  henchman(){
+    this.route.navigateForward("/henchman")
+  }
+
   notifications(){
     this.route.navigateForward("/notifications")
   }

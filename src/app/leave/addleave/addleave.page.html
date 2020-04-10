@@ -1,9 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>addleave</ion-title>
+    <ion-row>
+      <ion-col size="10%">
+        <ion-icon size="large" name="arrow-back" (click)="back()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title>เพิ่มคำขอลางาน</ion-title>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
+  <ion-progress-bar [hidden]=Type type="indeterminate"></ion-progress-bar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="Type">
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10%">
+        ประเภท : 
+      </ion-col>
+      <ion-col style="width:60%;">
+        <ion-select [(ngModel)]="Typeleave" [compareWith]="compareWith">
+          <ion-select-option *ngFor="let item of Type">{{item.id}}.{{item.type.type_leave}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="10%">
+        วันที่ลา :
+      </ion-col>
+      <ion-col >
+        <ion-datetime [(ngModel)]="Dateleave" displayFormat="DD MMMM YYYY" pickerFormat="DD MMMM YYYY" [min]="datenow" placeholder="เลือกวันที่ลางาน"></ion-datetime>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="10%">
+        จำนวนวันที่ลา :
+      </ion-col>
+      <ion-col >
+        <ion-input type="number" [(ngModel)]="Numberleave"></ion-input>
+      </ion-col>
+    </ion-row>
+    <div text-center class="Error">{{message}}</div> 
+    <ion-row>
+      <ion-col >
+        <ion-button expand="block"(click)="confirm()">ยืนยันการลางาน</ion-button>
+      </ion-col>
+      <ion-col >
+        <ion-button expand="block" (click)="back()">ยกเลิกการลางาน</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

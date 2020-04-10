@@ -12,10 +12,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FirebasefunctionService } from './service/firebase/firebasefunction.service'
 
+import { AddleavePageModule } from './leave/addleave/addleave.module'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,
+    AddleavePageModule],
   providers: [
     StatusBar,
     SplashScreen,
