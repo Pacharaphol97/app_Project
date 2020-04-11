@@ -6,25 +6,18 @@ const routes: Routes = [
   {
     path: 'signin',
     loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
-  },  {
+  },
+  {
     path: 'menu',
     loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   },
   {
     path: 'calender',
-    loadChildren: () => import('./eventcalender/calender/calender.module').then( m => m.CalenderPageModule)
-  },
-  {
-    path: 'addevent',
-    loadChildren: () => import('./eventcalender/addevent/addevent.module').then( m => m.AddeventPageModule)
+    loadChildren: () => import('./calender/calender.module').then( m => m.CalenderPageModule)
   },
   {
     path: 'publicrelations',
-    loadChildren: () => import('./publicrelations/publicrelations/publicrelations.module').then( m => m.PublicrelationsPageModule)
-  },
-  {
-    path: 'addpublicrelations',
-    loadChildren: () => import('./publicrelations/addpublicrelations/addpublicrelations.module').then( m => m.AddpublicrelationsPageModule)
+    loadChildren: () => import('./publicrelations/publicrelations.module').then( m => m.PublicrelationsPageModule)
   },
   {
     path: 'notifications',
