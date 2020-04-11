@@ -40,6 +40,11 @@ export class FirebasefunctionService {
     return this.httpclient.post(firebaseFunction.functionURL +'/createleave',body).toPromise();
   }
 
+  //แก้ไขข้อมูลการลางาน
+  editleave(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/editleave',body).toPromise();
+  }
+
   //ยกเลิกคำขอการลางานของพนักงาน
   cancelLeave(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/cancelleave',body).toPromise();

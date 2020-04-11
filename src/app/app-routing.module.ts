@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'henchman',
     loadChildren: () => import('./henchman/henchman.module').then( m => m.HenchmanPageModule)
   },
+  {
+    path: 'editleave',
+    loadChildren: () => import('./leave/editleave/editleave.module').then( m => m.EditleavePageModule)
+  },
 
 
 ];

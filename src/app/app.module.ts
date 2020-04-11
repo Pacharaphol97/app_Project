@@ -13,12 +13,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FirebasefunctionService } from './service/firebase/firebasefunction.service'
 
 import { AddleavePageModule } from './leave/addleave/addleave.module'
+import { EditleavePageModule } from './leave/editleave/editleave.module'
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,
-    AddleavePageModule],
+    AddleavePageModule,EditleavePageModule],
   providers: [
     StatusBar,
     SplashScreen,

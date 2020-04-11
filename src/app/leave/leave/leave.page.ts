@@ -3,7 +3,7 @@ import { NavController, ModalController, PopoverController,AlertController } fro
 import { FirebasefunctionService } from '../../service/firebase/firebasefunction.service';
 
 import { AddleavePage } from '../addleave/addleave.page';
-import { async } from '@angular/core/testing';
+import { EditleavePage } from '../editleave/editleave.page';
 
 @Component({
   selector: 'app-leave',
@@ -57,7 +57,7 @@ export class LeavePage implements OnInit {
       const startmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startdata)
       const startyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startdata)
 
-      const enddata = startdata.setDate(startdata.getDate()+doc.dataleave.leave_number);
+      const enddata = startdata.setDate(startdata.getDate()+(doc.dataleave.leave_number-1));
       const endday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(enddata)
       const endmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(enddata)
       const endyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(enddata)
@@ -74,9 +74,11 @@ export class LeavePage implements OnInit {
       this.dataLeave.data[this.ileave] = {
         uid:doc.id,
         id:doc.dataleave.id,
+        typeid:Typeid,
         type:Typename,
         day:doc.dataleave.leave_number,
         startdata:startday+'/'+startmonth+'/'+startyear,
+        startdataiso:new Date(doc.dataleave.leave_date._seconds * 1000),
         enddata:endday+'/'+endmonth+'/'+endyear,
         status:messagestatus,
         icon:icon
@@ -95,14 +97,29 @@ export class LeavePage implements OnInit {
       }
     });
      await modal.present();
-     modal.onDidDismiss().then(() => {
-      this.dataloading = false;
-      this.getLeave()
+     modal.onDidDismiss().then(res => {
+       if(res.data.dataSuccess){
+        this.dataloading = false;
+        this.getLeave()
+       }
      })
   }
 
-  editleave(data){
-    console.log(data)
+  async editleave(data){
+    const modal = await this.modalcontroller.create({
+      component: EditleavePage,
+      componentProps: {
+        Type:this.typeleavename,
+        data:data
+      }
+    });
+     await modal.present();
+     modal.onDidDismiss().then(res => {
+      if(res.data.dataSuccess){
+        this.dataloading = false;
+        this.getLeave()
+       }
+     })
   }
 
   async cancelleave(data){
