@@ -9,10 +9,14 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
+  <ion-progress-bar [hidden]=dataloading type="indeterminate"></ion-progress-bar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let item of publicrelations">
+<ion-content *ngIf="dataloading">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of dataPublicRelations.data">
     <ion-card-header>
       <ion-card-title>{{item.topic}}</ion-card-title>
     </ion-card-header>

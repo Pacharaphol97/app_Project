@@ -49,4 +49,9 @@ export class FirebasefunctionService {
   cancelLeave(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/cancelleave',body).toPromise();
   }
+
+  //ขอข้อมูลข่าวประชาสัมพันธ์
+  getPublicRelations(){
+    return this.httpclient.get(firebaseFunction.functionURL +'/getPublicRelations').toPromise();
+  }
 }

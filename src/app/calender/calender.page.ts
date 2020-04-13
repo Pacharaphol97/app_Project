@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController,ModalController } from '@ionic/angular';
+import { CalendarModal,CalendarComponentOptions,CalendarModalOptions } from 'ion2-calendar'
 
 @Component({
   selector: 'app-calender',
@@ -8,11 +9,23 @@ import { NavController } from '@ionic/angular';
 })
 export class CalenderPage implements OnInit {
 
+  dateCalendar:string[];
+  type: 'string';
+
+  optionsCalendar: CalendarComponentOptions = {
+    pickMode: 'multi',
+  };
+
   constructor(
-    public route: NavController
+    public route: NavController,
+    public modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
+  }
+
+  onSelect(event){
+    console.log(event)
   }
 
   back(){

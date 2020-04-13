@@ -52,12 +52,12 @@ export class LeavePage implements OnInit {
         }
       })
       
-      const startdata = new Date(doc.dataleave.leave_date._seconds * 1000);
-      const startday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startdata)
-      const startmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startdata)
-      const startyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startdata)
+      const startdate = new Date(doc.dataleave.leave_date._seconds * 1000);
+      const startday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startdate)
+      const startmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startdate)
+      const startyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startdate)
 
-      const enddata = startdata.setDate(startdata.getDate()+(doc.dataleave.leave_number-1));
+      const enddata = startdate.setDate(startdate.getDate()+(doc.dataleave.leave_number-1));
       const endday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(enddata)
       const endmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(enddata)
       const endyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(enddata)
