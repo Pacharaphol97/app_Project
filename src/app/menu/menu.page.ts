@@ -15,6 +15,7 @@ export class MenuPage implements OnInit {
   lastname;
   positionname;
   permission;
+  showmenu
 
   constructor(
     public firebaseAPI: FirebasefunctionService,
@@ -23,6 +24,7 @@ export class MenuPage implements OnInit {
 
   async ngOnInit() {
     await this.personnel()
+    this.Permission()
   }
 
   async personnel(){
@@ -36,6 +38,17 @@ export class MenuPage implements OnInit {
     this.positionname = res.position.position_name
     this.permission = res.position.permission
     window.localStorage.setItem('@personnel',JSON.stringify(res))
+  }
+
+  Permission(){
+    switch (this.permission) {
+      case "leader":
+        this.showmenu = false
+        break;
+      default:
+        this.showmenu = true
+        break;
+    }
   }
 
   profile(){

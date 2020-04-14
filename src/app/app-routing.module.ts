@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path: 'editleave',
     loadChildren: () => import('./leave/editleave/editleave.module').then( m => m.EditleavePageModule)
+  },  {
+    path: 'approveleave',
+    loadChildren: () => import('./leave/approveleave/approveleave.module').then( m => m.ApproveleavePageModule)
   },
+
 
 
 ];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController,ActionSheetController } from '@ionic/angular';
 import { FirebasefunctionService } from '../service/firebase/firebasefunction.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class HenchmanPage implements OnInit {
 
   constructor(
     public route: NavController,
-    public firebaseAPI: FirebasefunctionService
+    public firebaseAPI: FirebasefunctionService,
+    public actionSheetController: ActionSheetController
   ) { }
 
   async ngOnInit() {
@@ -28,6 +29,26 @@ export class HenchmanPage implements OnInit {
     const res:any = await this.firebaseAPI.getHenchman(bodyhenchman)
     this.dataHenchman = res
     
+  }
+
+  async presentActionSheet(data) {
+    let fullname = data.personnel.personnel_fullname.personnel_prefix+data.personnel.personnel_fullname.personnel_firstname+" "+data.personnel.personnel_fullname.personnel_lastname
+    const actionSheet = await this.actionSheetController.create({
+      header: fullname,
+      buttons: [{
+        text: 'ดูข้อมูลคำขอลางาน',
+        icon: 'document',
+        handler: () => {
+          this.route.navigateForward(["/approveleave",{ dataPersonnel: JSON.stringify(data) }])
+        }
+      },
+      {
+        text: 'ยกเลิก',
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
   }
 
   back(){

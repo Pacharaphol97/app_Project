@@ -50,6 +50,11 @@ export class FirebasefunctionService {
     return this.httpclient.post(firebaseFunction.functionURL +'/cancelleave',body).toPromise();
   }
 
+  //อนุมัติคำขอลางานของพนักงาน
+  approveleave(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/approveleave',body).toPromise();
+  }
+
   //ขอข้อมูลข่าวประชาสัมพันธ์
   getPublicRelations(){
     return this.httpclient.get(firebaseFunction.functionURL +'/getPublicRelations').toPromise();

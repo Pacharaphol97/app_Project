@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="10%">
+        <ion-icon size="large" name="arrow-back" (click)="back()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title>คำขอลางาน</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-progress-bar [hidden]=dataloading type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content *ngIf="dataloading">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of dataLeave.data">
+    <ion-card-content>
+      <ion-card-title>คำขอลางาน</ion-card-title>
+      <ion-grid>
+        <ion-row>ชื่อผู้ขอ : {{fullname}}</ion-row>
+        <ion-row>ประเภท : {{item.type}}</ion-row>
+        <ion-row>วันที่เริ่ม : {{item.startdata}}</ion-row>
+        <ion-row>วันที่สิ้นสุด : {{item.enddata}}</ion-row>
+        <ion-row>จำนวนวันลา : {{item.day}} วัน</ion-row>
+        <ion-row >สถานะ : {{item.status}} {{item.approvedata}}
+          <ion-col style="text-align: right;" [hidden]=item.icon>
+            <ion-icon class="icon" name="checkbox-outline" (click)="approveleave(item)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
