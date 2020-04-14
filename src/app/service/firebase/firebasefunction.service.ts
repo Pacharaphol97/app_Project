@@ -59,4 +59,14 @@ export class FirebasefunctionService {
   getPublicRelations(){
     return this.httpclient.get(firebaseFunction.functionURL +'/getPublicRelations').toPromise();
   }
+
+  //ขอกำหนดการต่าง ๆ
+  getSchedule(){
+    return this.httpclient.get(firebaseFunction.functionURL +'/getSchedule').toPromise();
+  }
+
+  //เพิ่มกำหนดการต่าง ๆ
+  createSchedule(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/createSchedule',body).toPromise();
+  }
 }

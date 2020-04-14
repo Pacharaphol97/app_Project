@@ -9,8 +9,22 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
+  <ion-progress-bar [hidden]=dataloading type="indeterminate"></ion-progress-bar>
 </ion-header>
 
-<ion-content>
-
+<ion-content *ngIf=dataloading>
+  <ion-card *ngFor="let item of dataSchedule.data">
+    <ion-card-content>
+      <ion-card-title>{{item.topic}}</ion-card-title>
+      <ion-grid>
+        <ion-row>{{item.detail}}</ion-row>
+        <ion-row>วันที่กำหนดการ : {{item.determine}}</ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+<ion-fab [hidden]=!dataloading vertical="bottom" horizontal="end" slot="fixed" >
+  <ion-fab-button>
+    <ion-icon name="add" (click)="addschedule()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

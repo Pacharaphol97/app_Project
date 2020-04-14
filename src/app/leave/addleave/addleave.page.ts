@@ -27,6 +27,7 @@ export class AddleavePage implements OnInit {
 
   async confirm(){
     try {
+      this.message = ''
       let id = 1+this.Id
 
       let typeid = this.Typeleave.split('.');
