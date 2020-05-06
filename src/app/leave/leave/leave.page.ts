@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController, PopoverController,AlertController } from '@ionic/angular';
+import { FirebasefunctionService } from '../../service/firebase/firebasefunction.service';
+
+import { AddleavePage } from '../addleave/addleave.page';
+import { EditleavePage } from '../editleave/editleave.page';
 
 @Component({
   selector: 'app-leave',
@@ -8,13 +12,146 @@ import { NavController } from '@ionic/angular';
 })
 export class LeavePage implements OnInit {
 
+  dataloading = false;
+  typeleavename:any;
+  dataLeave:any
+  ileave:any;
+
   constructor(
-    public route: NavController
+    public route: NavController,
+    public alertController: AlertController,
+    public modalcontroller: ModalController,
+    public popoverController: PopoverController,
+    public firebaseAPI: FirebasefunctionService
   ) { }
 
-  leave = [{type:'ลาพักร้อน',startdata:'14/03/2563',enddata:'20/03/2563',day:'7',status:'รอการอนุมัติ'},{type:'ลากิจ',startdata:'17/02/2563',enddata:'17/02/2563',day:'1',status:'ได้รับการอนุมัติ',approvedata:'16/02/2563 , 15:43'}]
+  async ngOnInit() {
+    await this.getLeave()
+  }
 
-  ngOnInit() {
+  async getLeave(){
+    this.typeleavename ='';
+    this.dataLeave = ''
+    this.ileave = 0
+
+    const resType:any = await this.firebaseAPI.getTypeleave()
+    this.typeleavename = resType.data
+
+    var uid = window.localStorage.getItem('@uid')
+    let body = {
+      uid:uid
+    }
+    const res:any = await this.firebaseAPI.getLeave(body)
+    this.dataLeave = {data:[]}
+    res.data.forEach(doc => {
+      let Typename = "ไม่ทราบประเภทการลางาน"
+      const Typeid = doc.dataleave.type_id
+      this.typeleavename.forEach(typename => {
+        if(typename.id == Typeid){
+          Typename = typename.type.type_leave
+        }
+      })
+      
+      const startdate = new Date(doc.dataleave.leave_date._seconds * 1000);
+      const startday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startdate)
+      const startmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(startdate)
+      const startyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startdate)
+
+      const enddata = startdate.setDate(startdate.getDate()+(doc.dataleave.leave_number-1));
+      const endday = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(enddata)
+      const endmonth = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(enddata)
+      const endyear = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(enddata)
+
+      let messagestatus
+      let icon
+      const status = doc.dataleave.approve_status
+      switch (status) {
+        case true:messagestatus = "ได้รับการอนุมัติ"; icon = true; break;
+        case false:messagestatus = "ไม่ได้รับการอนุมัติ"; icon = true; break;
+        default:messagestatus = "รอการอนุมัติ"; icon = false; break;
+      }
+      
+      this.dataLeave.data[this.ileave] = {
+        uid:doc.id,
+        id:doc.dataleave.id,
+        typeid:Typeid,
+        type:Typename,
+        day:doc.dataleave.leave_number,
+        startdata:startday+'/'+startmonth+'/'+startyear,
+        startdataiso:new Date(doc.dataleave.leave_date._seconds * 1000),
+        enddata:endday+'/'+endmonth+'/'+endyear,
+        status:messagestatus,
+        icon:icon
+      } 
+      this.ileave++
+    });
+    this.dataloading = true
+  }
+
+  async addleave(){
+    const modal = await this.modalcontroller.create({
+      component: AddleavePage,
+      componentProps: {
+        Id:this.ileave,
+        Type:this.typeleavename
+      }
+    });
+     await modal.present();
+     modal.onDidDismiss().then(res => {
+       if(res.data.dataSuccess){
+        this.dataloading = false;
+        this.getLeave()
+       }
+     })
+  }
+
+  async editleave(data){
+    const modal = await this.modalcontroller.create({
+      component: EditleavePage,
+      componentProps: {
+        Type:this.typeleavename,
+        data:data
+      }
+    });
+     await modal.present();
+     modal.onDidDismiss().then(res => {
+      if(res.data.dataSuccess){
+        this.dataloading = false;
+        this.getLeave()
+       }
+     })
+  }
+
+  async cancelleave(data){
+    const alert = await this.alertController.create({
+      header: 'ยืนยันการยกเลิกคำขอลางาน',
+      message: 'ประเภท : ' + data.type 
+      +'<br/> วันที่เริ่ม : ' +data.startdata
+      +'<br/> วันที่สิ้นสุด : ' +data.enddata
+      +'<br/> จำนวนวันลา : ' +data.day,
+      buttons: [{
+        text: 'ยืนยัน',
+        handler: async() => {
+          const body = {
+            uid:window.localStorage.getItem('@uid'),
+            leaveid:data.uid
+          }
+          this.dataloading = false;
+          await this.firebaseAPI.cancelLeave(body)
+          this.getLeave()
+        }
+      }, {
+        text: 'ยกเลิก',
+      }]
+    });
+    await alert.present();
+  }
+
+  doRefresh(event) {
+    this.getLeave()
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 
   back(){

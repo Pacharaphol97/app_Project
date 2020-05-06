@@ -6,25 +6,18 @@ const routes: Routes = [
   {
     path: 'signin',
     loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
-  },  {
+  },
+  {
     path: 'menu',
     loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   },
   {
     path: 'calender',
-    loadChildren: () => import('./eventcalender/calender/calender.module').then( m => m.CalenderPageModule)
-  },
-  {
-    path: 'addevent',
-    loadChildren: () => import('./eventcalender/addevent/addevent.module').then( m => m.AddeventPageModule)
+    loadChildren: () => import('./calender/calender.module').then( m => m.CalenderPageModule)
   },
   {
     path: 'publicrelations',
-    loadChildren: () => import('./publicrelations/publicrelations/publicrelations.module').then( m => m.PublicrelationsPageModule)
-  },
-  {
-    path: 'addpublicrelations',
-    loadChildren: () => import('./publicrelations/addpublicrelations/addpublicrelations.module').then( m => m.AddpublicrelationsPageModule)
+    loadChildren: () => import('./publicrelations/publicrelations.module').then( m => m.PublicrelationsPageModule)
   },
   {
     path: 'notifications',
@@ -54,6 +47,22 @@ const routes: Routes = [
     path: 'setting',
     loadChildren: () => import('./settings/setting/setting.module').then( m => m.SettingPageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'henchman',
+    loadChildren: () => import('./henchman/henchman.module').then( m => m.HenchmanPageModule)
+  },
+  {
+    path: 'editleave',
+    loadChildren: () => import('./leave/editleave/editleave.module').then( m => m.EditleavePageModule)
+  },  {
+    path: 'approveleave',
+    loadChildren: () => import('./leave/approveleave/approveleave.module').then( m => m.ApproveleavePageModule)
+  },
+
 
 
 ];

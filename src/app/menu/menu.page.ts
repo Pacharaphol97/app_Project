@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { FirebasefunctionService } from '../service/firebase/firebasefunction.service';
 import * as firebase from 'firebase';
 
 @Component({
@@ -9,11 +10,53 @@ import * as firebase from 'firebase';
 })
 export class MenuPage implements OnInit {
 
+  prefix;
+  firstname;
+  lastname;
+  positionname;
+  permission;
+  showmenu
+
   constructor(
+    public firebaseAPI: FirebasefunctionService,
     public route: NavController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.personnel()
+    this.Permission()
+  }
+
+  async personnel(){
+    var bodypersonnel = {
+      uid: window.localStorage.getItem('@uid')
+    }
+    const res:any = await this.firebaseAPI.getPersonnel(bodypersonnel)
+    this.prefix = res.personnel.personnel_fullname.personnel_prefix
+    this.firstname = res.personnel.personnel_fullname.personnel_firstname
+    this.lastname = res.personnel.personnel_fullname.personnel_lastname
+    this.positionname = res.position.position_name
+    this.permission = res.position.permission
+    window.localStorage.setItem('@personnel',JSON.stringify(res))
+  }
+
+  Permission(){
+    switch (this.permission) {
+      case "leader":
+        this.showmenu = false
+        break;
+      default:
+        this.showmenu = true
+        break;
+    }
+  }
+
+  profile(){
+    this.route.navigateForward("/profile")
+  }
+
+  henchman(){
+    this.route.navigateForward("/henchman")
   }
 
   notifications(){

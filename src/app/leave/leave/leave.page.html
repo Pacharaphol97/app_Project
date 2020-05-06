@@ -9,24 +9,35 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
+  <ion-progress-bar [hidden]=dataloading type="indeterminate"></ion-progress-bar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let item of leave">
+<ion-content *ngIf="dataloading">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of dataLeave.data">
     <ion-card-content>
       <ion-card-title>คำขอลางาน</ion-card-title>
       <ion-grid>
         <ion-row>ประเภท : {{item.type}}</ion-row>
-        <ion-row>จำนวนวันลา : {{item.day}} วัน</ion-row>
         <ion-row>วันที่เริ่ม : {{item.startdata}}</ion-row>
         <ion-row>วันที่สิ้นสุด : {{item.enddata}}</ion-row>
-        <ion-row>สถานะ : {{item.status}} {{item.approvedata}}</ion-row>
+        <ion-row>จำนวนวันลา : {{item.day}} วัน</ion-row>
+        <ion-row >สถานะ : {{item.status}} {{item.approvedata}}
+          <ion-col style="text-align: right;" [hidden]=item.icon>
+            <ion-icon class="icon" name="create" (click)="editleave(item)"></ion-icon>
+          </ion-col>
+          <ion-col size="10%" style="text-align: right;" [hidden]=item.icon>
+            <ion-icon class="icon" name="trash" (click)="cancelleave(item)"></ion-icon>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab [hidden]=!dataloading vertical="bottom" horizontal="end" slot="fixed" >
   <ion-fab-button>
-    <ion-icon name="add"></ion-icon>
+    <ion-icon name="add" (click)="addleave()"></ion-icon>
   </ion-fab-button>
 </ion-fab>
