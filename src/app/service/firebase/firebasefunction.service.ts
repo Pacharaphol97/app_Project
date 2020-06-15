@@ -15,6 +15,11 @@ export class FirebasefunctionService {
     return headers;
   }
 
+  //ตรวจสอบเวลาบันทึกเข้างาน ออกงาน
+  getTimestamp(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/gettimestamp',body).toPromise();
+  }
+
   //ตรวจสอบข้อมูลพนักงาน
   getPersonnel(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/getPersonnel',body).toPromise();
