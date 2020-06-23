@@ -21,7 +21,7 @@
       <ion-card-title>{{item.topic}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      {{item.details}}
+      <div [innerHTML]="item.details"></div>
     </ion-card-content>
     <ion-grid>
       <ion-row>
