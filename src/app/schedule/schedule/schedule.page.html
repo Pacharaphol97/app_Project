@@ -19,12 +19,21 @@
       <ion-grid>
         <ion-row>{{item.detail}}</ion-row>
         <ion-row>วันที่กำหนดการ : {{item.determine}}</ion-row>
+        <ion-row>ผู้สร้างกำหนดการ : {{item.personnel}}</ion-row>
+        <ion-row>
+          <ion-col style="text-align: right;" [hidden]=item.icon>
+            <ion-icon class="icon" name="create" (click)="editSchedule(item)"></ion-icon>
+          </ion-col>
+          <ion-col size="10%" style="text-align: right;" [hidden]=item.icon>
+            <ion-icon class="icon" name="trash" (click)="deleteSchedule(item)"></ion-icon>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
 <ion-fab [hidden]=!dataloading vertical="bottom" horizontal="end" slot="fixed" >
-  <ion-fab-button>
+  <ion-fab-button [hidden]=showaddschedule>
     <ion-icon name="add" (click)="addschedule()"></ion-icon>
   </ion-fab-button>
 </ion-fab>

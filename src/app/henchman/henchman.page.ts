@@ -43,6 +43,13 @@ export class HenchmanPage implements OnInit {
         }
       },
       {
+        text:'ดูเวลาเข้างาน เลิกงาน',
+        icon:'time',
+        handler: () => {
+          this.route.navigateForward(["/timestampteam",{ dataPersonnel: JSON.stringify(data) }])
+        }
+      },
+      {
         text: 'ยกเลิก',
         icon: 'close',
         role: 'cancel'

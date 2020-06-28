@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="10%">
+        <ion-icon size="large" name="arrow-back" (click)="back()"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-title>เวลาเข้างาน ออกงาน</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-progress-bar [hidden]=dataloading type="indeterminate"></ion-progress-bar>
+</ion-header>
+
+<ion-content *ngIf="dataloading">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of datatimestamp.data">
+    <ion-grid>
+      <ion-card-title>{{item.datatimein.day}}</ion-card-title>
+      <ion-row style="text-align:center" >
+        <ion-col>
+          <ion-label class="text">เวลาเข้างาน</ion-label><br>
+          <ion-label class="time">{{item.datatimein.time}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label class="text">เวลาออกงาน</ion-label><br>
+          <ion-label class="time">{{item.datatimeout.time}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

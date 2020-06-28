@@ -74,4 +74,12 @@ export class FirebasefunctionService {
   createSchedule(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/createSchedule',body).toPromise();
   }
+
+  editSchedule(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/editSchedule',body).toPromise();
+  }
+
+  deleteSchedule(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/deleteSchedule',body).toPromise();
+  }
 }
