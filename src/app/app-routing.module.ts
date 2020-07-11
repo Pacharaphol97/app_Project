@@ -62,6 +62,14 @@ const routes: Routes = [
     path: 'approveleave',
     loadChildren: () => import('./leave/approveleave/approveleave.module').then( m => m.ApproveleavePageModule)
   },
+  {
+    path: 'timestampteam',
+    loadChildren: () => import('./timestampteam/timestampteam.module').then( m => m.TimestampteamPageModule)
+  },
+  {
+    path: 'editschedule',
+    loadChildren: () => import('./schedule/editschedule/editschedule.module').then( m => m.EditschedulePageModule)
+  },
 
 
 

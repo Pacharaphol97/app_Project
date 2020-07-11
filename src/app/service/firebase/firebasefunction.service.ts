@@ -15,6 +15,11 @@ export class FirebasefunctionService {
     return headers;
   }
 
+  //ตรวจสอบเวลาบันทึกเข้างาน ออกงาน
+  getTimestamp(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/gettimestamp',body).toPromise();
+  }
+
   //ตรวจสอบข้อมูลพนักงาน
   getPersonnel(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/getPersonnel',body).toPromise();
@@ -68,5 +73,13 @@ export class FirebasefunctionService {
   //เพิ่มกำหนดการต่าง ๆ
   createSchedule(body){
     return this.httpclient.post(firebaseFunction.functionURL +'/createSchedule',body).toPromise();
+  }
+
+  editSchedule(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/editSchedule',body).toPromise();
+  }
+
+  deleteSchedule(body){
+    return this.httpclient.post(firebaseFunction.functionURL +'/deleteSchedule',body).toPromise();
   }
 }

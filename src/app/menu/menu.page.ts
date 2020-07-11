@@ -16,6 +16,8 @@ export class MenuPage implements OnInit {
   positionname;
   permission;
   showmenu
+  teamname
+  showteamname
 
   constructor(
     public firebaseAPI: FirebasefunctionService,
@@ -37,16 +39,28 @@ export class MenuPage implements OnInit {
     this.lastname = res.personnel.personnel_fullname.personnel_lastname
     this.positionname = res.position.position_name
     this.permission = res.position.permission
+
+    var bodyleader = {
+      uid: res.personnel.leader_uid
+    }
+    const res2:any = await this.firebaseAPI.getPersonnel(bodyleader)
+    this.teamname = res2.personnel.personnel_fullname.personnel_prefix+res2.personnel.personnel_fullname.personnel_firstname+" "+res2.personnel.personnel_fullname.personnel_lastname
     window.localStorage.setItem('@personnel',JSON.stringify(res))
   }
 
   Permission(){
     switch (this.permission) {
+      case "manager":
+        this.showmenu = false
+        this.showteamname = true
+        break;
       case "leader":
         this.showmenu = false
+        this.showteamname = false
         break;
       default:
         this.showmenu = true
+        this.showteamname = false
         break;
     }
   }

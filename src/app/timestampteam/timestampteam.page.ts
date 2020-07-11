@@ -1,29 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController,AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 import { FirebasefunctionService } from '../service/firebase/firebasefunction.service';
 
 @Component({
-  selector: 'app-timestamp',
-  templateUrl: './timestamp.page.html',
-  styleUrls: ['./timestamp.page.scss'],
+  selector: 'app-timestampteam',
+  templateUrl: './timestampteam.page.html',
+  styleUrls: ['./timestampteam.page.scss'],
 })
-export class TimestampPage implements OnInit {
+export class TimestampteamPage implements OnInit {
 
-  dataloading:boolean
+  dataPersonnel
+  fullname
   datatimestamp
+  dataloading = false
 
   constructor(
     public route: NavController,
+    public act: ActivatedRoute,
+    public alertController: AlertController,
     public firebaseAPI: FirebasefunctionService
   ) { }
 
-  async ngOnInit() {
-    await this.getTimestamp()
+  ngOnInit() {
+    this.Personnel()
+    this.getTimestamp()
+  }
+
+  Personnel(){
+    let res:any = this.act.snapshot.paramMap.get('dataPersonnel');
+    this.dataPersonnel = JSON.parse(res)
+    this.fullname = this.dataPersonnel.personnel.personnel_fullname.personnel_prefix+this.dataPersonnel.personnel.personnel_fullname.personnel_firstname+" "+this.dataPersonnel.personnel.personnel_fullname.personnel_lastname
   }
 
   async getTimestamp(){
     this.dataloading = false
-    var uid = window.localStorage.getItem('@uid')
+    var uid = this.dataPersonnel.uid
     let body = {
       uid:uid
     }
@@ -72,8 +84,8 @@ export class TimestampPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
-
+  
   back(){
-    this.route.navigateBack("/menu")
+    this.route.navigateBack("/henchman")
   }
 }
